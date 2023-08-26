@@ -1,12 +1,4 @@
-// const express = require('express');
 
-// const v1Routes = require('./v1');
-
-// const router = express.Router();
-
-// router.use('/v1', v1Routes);
-
-// module.exports = router;
 
 const express = require("express");
 const v1Routes = require("./v1"); // inside ./v1 folder we are going to write the version-1 APIs, similarly we can make a ./v2 folder and write the version-2 APIs
