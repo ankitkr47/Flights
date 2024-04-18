@@ -11,5 +11,12 @@ URL : /api/v1/airplanes/
 router.post("/", 
             AirplaneMiddlewares.validateCreateRequest,
             AirplaneController.createAirplane);
+/*
+method: get
+URL : /api/v1/airplanes/
+*/
+
+router.get("/", AirplaneController.getAirplanes);
+
 
 module.exports = router;
