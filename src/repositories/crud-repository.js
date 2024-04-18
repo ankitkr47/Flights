@@ -36,6 +36,9 @@ class CrudRepository {
           id: data,
         },
       }); // delete data query based on id.
+      if (!response) {
+        throw new AppError("Not able to find the data", StatusCodes.NOT_FOUND);
+      }
       return response;
     
   }
