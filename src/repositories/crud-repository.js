@@ -13,7 +13,9 @@ Follow this Documentation :
 - https://sequelize.org/docs/v6/core-concepts/model-querying-finders/
 */
 
+const { StatusCodes } = require("http-status-codes");
 const { Logger } = require("../config");
+const AppError = require("../utils/errors/app-error");
 class CrudRepository {
   constructor(model) {
     this.model = model;
@@ -39,7 +41,10 @@ class CrudRepository {
   }
   async get(data) {
   
-      const response = await this.model.findByPk(data); // find data query based on Primary Key
+    const response = await this.model.findByPk(data); // find data query based on Primary Key
+    if (!response) {
+      throw new AppError("Not able to find the data", StatusCodes.NOT_FOUND);
+    }
       return response;
     
   }
