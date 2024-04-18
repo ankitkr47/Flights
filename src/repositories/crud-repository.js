@@ -19,13 +19,13 @@ class CrudRepository {
     this.model = model;
   }
   async create(data) {
-    try {
+    // try {  //!commented out try catch block becouse handling the db errors in the service layer
       const response = await this.model.create(data); // insert data query
       return response;
-    } catch (error) {
-      Logger.error("Something went wrong in the CRUD Repo : create() function");
-      throw error; // catch the error in the service layer and manipulate this error more logically and create more custom error objects.
-    }
+    // } catch (error) {
+    //   Logger.error("Something went wrong in the CRUD Repo : create() function");
+    //   throw error; // catch the error in the service layer and manipulate this error more logically and create more custom error objects.
+    // }
   }
   async destroy(data) {
     try {
