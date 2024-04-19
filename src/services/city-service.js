@@ -9,8 +9,8 @@ async function createCity(data) {
         const city = await cityRepository.create(data);
         return city;
       } catch (error) {
-        // console.log(error.name);
-        if (error.name == 'SequelizeValidationError') {
+        console.log(error.name);
+        if (error.name == 'SequelizeValidationError' || error.name =='SequelizeUniqueConstraintError') {
           let explanation = [];
           error.errors.forEach((err) => {
             explanation.push(err.message);
@@ -22,6 +22,32 @@ async function createCity(data) {
       }
 }
 
+async function deleteCity(id) {
+  try {
+    const response = await cityRepository.destroy(id);
+    return response;
+  } catch (error) {
+    if (error.statusCode == StatusCodes.NOT_FOUND) {
+      throw new AppError("The City you requested is not found",error.statusCode);
+    }
+    throw new AppError("Cannot fetch data of the City",StatusCodes.INTERNAL_SERVER_ERROR);
+  }
+}
+
+async function updateCity(id,data) {
+  try {
+    const response = await cityRepository.update(id, data);
+    return response;
+  } catch (error) {
+    if (error.statusCode == StatusCodes.NOT_FOUND) {
+      throw new AppError("The City you requested is not found",error.statusCode);
+    }
+    throw new AppError("Cannot fetch data of the City",StatusCodes.INTERNAL_SERVER_ERROR);
+  }
+  
+}
 module.exports = {
-    createCity
+  createCity,
+  deleteCity,
+  updateCity
 }
